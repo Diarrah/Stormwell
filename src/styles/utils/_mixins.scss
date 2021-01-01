@@ -1,0 +1,11 @@
+@mixin rwd--width($screen) {
+    @media (max-width: $screen+'px') {
+        @content;
+    }
+}
+
+@mixin rwd--height($screen) {
+    @media (max-height: $screen+'px') {
+        @content;
+    }
+}
