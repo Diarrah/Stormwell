@@ -1,0 +1,216 @@
+.contact {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 50vh 0 50px;
+    padding-right: 0vw !important;
+    z-index: 3;
+
+    &__textbox {
+        position: relative;
+        align-self: center;
+        width: 60%; height: 100%;
+        border: 1px solid darkred;
+
+       .textbox {
+           &__heading {
+               max-width: 105%;
+               border: 1px solid green;
+
+               .exclamation {
+                   display: none;
+                }
+           }
+
+           &__subheading {
+               text-transform: uppercase;
+               text-align: center;
+               letter-spacing: 3px;
+               margin-top: 5px;
+            }
+
+           &__socials__grid {
+               display: grid;
+               grid-template-columns: repeat(2, auto);
+               background-color: rgba(white, .75);
+               margin: 30px auto 0;
+               width: max-content;
+               //border: 1px solid red;
+
+               .grid__item {
+                   display: flex;
+                   align-items: center;
+                   padding: 15px 0px;
+
+                   img {
+                       height: 40px; width: 40px;
+                       margin-right: 20px;
+                   }
+
+                   &:nth-of-type(1), &:nth-of-type(3) {
+                       border-right: 1px dotted black;
+                       padding-right: 40px;
+                   }
+
+                   &:nth-of-type(2), &:nth-of-type(4) {
+                       padding-left: 40px;
+                    }
+                }
+            }
+
+            &__form {
+                position: absolute;
+                width: 100%;
+                top: 0; left: 65vw;
+                //border: 1px solid rgba(black, .5);
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 1px 3px 5px 1px rgba(black, .1);
+                border-top: 1px solid rgba(black, .05);
+                border: 5px solid red;
+
+                @include rwd--width(800) {
+                    border: 5px solid purple;
+                    width: 84vw;
+                }
+                
+                &__control {
+                    display: flex;
+                    position: relative;
+                    align-items: center;
+                    margin-bottom: 25px;
+
+                    & > * { font-family: inherit }
+
+                    small { display: none }
+                    span { width: 90px; font-size: 18px; }
+
+                    &.invalid {
+                        small {
+                            display: block;
+                            position: absolute;
+                            color: #C80B27;
+                            bottom: -1px;
+                            transform: translateY(100%);
+                            left: 100px;
+
+                            &::after {
+                                content: url(../../images/coupons/close.svg);
+                                position: absolute;
+                                top: 1px; left: -15px;
+                            }
+                        }
+                    }
+
+                    &:nth-of-type(1), &:nth-of-type(2) {
+                        input {
+                            width: 100%;
+                            height: 40px;
+                            padding-left: 15px;
+                            border: 0;
+                            border-bottom: 1px solid #000;
+                            font-size: 17px;
+                        }
+
+                        &.invalid {
+                           input { border-bottom: 1px solid #C80B27 }
+                        }
+                    }
+
+                    &:nth-of-type(3) {
+                        margin: 35px 0 50px;
+                        
+                        & > * { 
+                            height: 40px;
+                            &.invalid { border: 2px solid #C80B27 }
+                        }
+
+                        span {
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        input {
+                            font-size: 17px;
+                            &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+                                -webkit-appearance: none;
+                            }
+                            &:nth-of-type(1) { width: 50px }
+                            &:nth-of-type(2) { width: 75px }
+                        }
+
+                        select {
+                            margin: 0 20px;
+                            width: 150px;
+                            font-size: 17px;
+                        }
+                    }
+
+                    &:nth-of-type(4) {
+                        input { margin-right: 15px }
+                        input, label { cursor: pointer }
+                    }
+                }
+
+                button {
+                    background-color: #FF8B60;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    color: white;
+                    border: 1px solid transparent;
+
+                    &:hover {
+                        background-color: transparent;
+                        border-color: #FF8B60;
+                        color: #FF8B60;
+                    }
+                }
+            }
+        }
+    }
+
+    &__btn__container {
+        width: 32%;
+        display: flex;
+        position: relative;
+        background-color: #fff;
+        padding: 75px 5vw 75px 0;
+        border: 1px solid purple;
+        z-index: 5;
+
+        button {
+            display: flex;
+            background-color: transparent;
+            transform: scale(1.1);
+            border: 0;
+            border: 1px solid red;
+            
+            &:hover {
+                .container__btn__outline {
+                    animation: none;
+                    stroke: #E4485F;
+                }
+            }
+
+            svg {
+                max-width: 100%; height: 100%;
+                //border: 1px solid purple;
+
+                .container__btn__outline {
+                    animation: flash 5000ms infinite linear;
+
+                    @keyframes flash {
+                        0% {
+                            stroke: white;
+                        } 20% {
+                            stroke: #E4485F;
+                        } 30%, 100% {
+                            stroke: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
