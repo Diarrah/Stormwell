@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+body {
+    max-width: 1900px;
+    margin: 0 auto;
+    overflow: hidden;  
+
+    &.visible {
+        overflow: visible;
+
+        &::-webkit-scrollbar {
+            width: 15px;
+    
+            &-thumb {
+                background-color: rgba(black, .3);
+                border-radius: 7px;
+            }
+        } 
+    }
+
+    #root {
+        overflow-x: hidden;
+
+        & > * > *:not(.recipe-container):not(.about) {
+            padding: 0 8vw;
+        }
+    }
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
