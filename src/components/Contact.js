@@ -9,40 +9,49 @@ const Contact = () => {
           [birthday, setBirthday] = useState(),
           [birthmonth, setBirthmonth] = useState(),
           [birthyear, setBirthyear] = useState(),
-          [ageEligible, setAgeEligible] = useState(null);
+          [ageEligible, setAgeEligible] = useState(null),
+          [desktopAnimation, setDesktopAnimation] = useState(),
+          [mobileAnimation, setMobileAnimation] = useState();
     const formEl = useRef();
 
+    useEffect(() => {
+        setDesktopAnimation( 
+            gsap.timeline()
+                .to('.container__btn__outline', { rotate: 180, transformOrigin: "50% 50%", duration: 1.2 })
+                .to('.textbox__form', { display: "block", left: 0, duration: 1 }, '<')
+                .to('.textbox__heading > path', { stroke: "#E4485F", fill: "#E4485F", duration: .4 }, '-=.6')
+                .to('.textbox__heading', { transform: "translateY(-150%)", ease: "elastic.out(1, 0.3)", duration: 1.2 }, '<')
+                .to('.exclamation', { display: "block" }, '<')
+                .to('.textbox__socials__grid', { opacity: 0, duration: .1 }, '<')
+                .reverse() 
+        )
 
-    const timelineDesktop = gsap.timeline()
-        .to('.container__btn__outline', { rotate: 180, transformOrigin: "50% 50%", duration: 1.2 })
-        .to('.textbox__form', { left: 0, duration: 1 }, '<')
-        .to('.textbox__heading > path', { stroke: "#E4485F", fill: "#E4485F", duration: .4 }, '-=.6')
-        .to('.textbox__heading', { transform: "translateY(-150%)", ease: "elastic.out(1, 0.3)", duration: 1.2 }, '<')
-        .to('.exclamation', { display: "block" }, '<')
-        .to('.textbox__socials__grid', { opacity: 0, duration: .1 }, '<')
-        .reverse();       
-
-        const timelineMobile = gsap.timeline()
-            .to('.container__btn__outline', { rotate: 270, transformOrigin: "50% 50%", duration: 1.2 })
-            .to('.container__btn', { transform: "translateY(-100%)", duration: 1 }, '<')
-            .to('.textbox__form', { left: 0, duration: 1, width: "84vw" }, '<')
-            //.to('.textbox__socials__grid', { opacity: 0, duration: .01 }, '-=.5')
-            .to('.textbox__heading', { maxWidth: "160%", duration: .01 }, '-=.3')
-            .to('.exclamation', { display: "block" }, '<')
-            .to('.textbox__heading > path', { stroke: "#E4485F", fill: "#E4485F", duration: .01 }, '<')
-            .to('.textbox__heading', { transform: "translateY(-150%)", ease: "elastic.out(1, 0.3)", duration: 1.2 }, '-=.5')
-            .reverse();
+        setMobileAnimation (
+            gsap.timeline()
+                .to('.container__btn__outline', { rotate: 270, transformOrigin: "50% 50%", duration: 1.2 })
+                .to('.container__btn', { transform: "translateY(-100%)", duration: 1 }, '<')
+                .to('.textbox__form', { left: 0, duration: 1, width: "84vw" }, '<')
+                //.to('.textbox__socials__grid', { opacity: 0, duration: .01 }, '-=.5')
+                .to('.textbox__heading', { maxWidth: "160%", duration: .01 }, '-=.3')
+                .to('.exclamation', { display: "block" }, '<')
+                .to('.textbox__heading > path', { stroke: "#E4485F", fill: "#E4485F", duration: .01 }, '<')
+                .to('.textbox__heading', { transform: "translateY(-150%)", ease: "elastic.out(1, 0.3)", duration: 1.2 }, '-=.5')
+                .reverse()
+        )
+    }, [])
 
 
-        const handleDesktopClick = () => {
-            timelineDesktop.reversed(!timelineDesktop.reversed())
+    const handleClick = () => {
+        if (viewport >= 800 && desktopAnimation.reversed()) {
+            desktopAnimation.play()
+        } else if (viewport >= 800 && !desktopAnimation.reversed() || viewport >= 800 && !mobileAnimation.reversed()) {
+            desktopAnimation.reverse()
+        } else if (viewport < 800 && mobileAnimation.reversed()) {
+            mobileAnimation.play()
+        } else {
+            mobileAnimation.reverse()
         }
-
-        const handleMobileClick = () => {
-            timelineMobile.reversed(!timelineMobile.reversed())
-        }
-
-    console.log(viewport)
+    }
 
     const isEmpty = () => {
         let inputElements = [...formEl.current.children].slice(0, 2);
@@ -119,12 +128,9 @@ const Contact = () => {
     const handleFormValidation = (e) => {
         let checkbox = document.querySelector('.control--checkbox');
 
-        if (!checked) {
-            checkbox.classList.add('invalid')
-        } else {
-            checkbox.classList.remove('invalid')
-        }
-
+        if (!checked) checkbox.classList.add('invalid')
+        else checkbox.classList.remove('invalid')
+        
         e.preventDefault();
         isEmpty(); isValid(); birthdayErrorStates();
     }
@@ -236,7 +242,7 @@ const Contact = () => {
             </div>
 
             <div className="contact__btn__container">
-                <button onClick={() => viewport > 800 ? handleDesktopClick() : handleMobileClick()} className="container__btn" aria-label="Show form to sign up for exclusive coupons">
+                <button onClick={handleClick} className="container__btn" aria-label="Show form to sign up for exclusive coupons">
                     <svg width="560" height="560" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M509.291 153.408L285.291 25.408C282.006 23.531 277.995 23.531 274.71 25.408L50.71 153.408C47.382 155.307 45.334 158.848 45.334 162.667V397.334C45.334 401.153 47.382 404.694 50.71 406.593L274.71 534.593C276.353 535.532 278.166 536.001 280.001 536.001C281.836 536.001 283.649 535.532 285.292 534.593L509.292 406.593C512.62 404.694 514.668 401.153 514.668 397.334V162.667C514.667 158.848 512.619 155.307 509.291 153.408Z" fill="#FF8B60"/>
                         <path className="container__btn__outline" d="M525.267 199.336L525.269 199.338C527.102 200.874 527.969 203.28 527.545 205.628C527.545 205.629 527.544 205.629 527.544 205.629L485.747 436.543C485.322 438.891 483.667 440.84 481.412 441.637L481.409 441.638L238.192 527.693C237.071 528.09 235.91 528.175 234.782 527.971C233.654 527.767 232.596 527.28 231.686 526.515H231.685L34.0659 360.664L34.064 360.663C32.2309 359.126 31.3647 356.72 31.7897 354.372L73.5875 123.458C74.0125 121.11 75.6671 119.16 77.9225 118.363L77.9249 118.363L321.142 32.3072C323.373 31.5177 325.835 31.9633 327.648 33.4849C327.648 33.4849 327.648 33.4849 327.648 33.485L525.267 199.336Z" stroke="white" strokeWidth="8"/>
