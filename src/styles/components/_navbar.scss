@@ -72,5 +72,15 @@
                 text-decoration: none;
             }
         }
+
+        @include rwd--width(616) {
+            width: 250px;
+            
+            li { font-size: 12px }
+        }
+
+        @include rwd--width(380) {
+            width: 200px;
+        }
     }
 }

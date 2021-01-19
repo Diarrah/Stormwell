@@ -9,9 +9,7 @@
     margin-bottom: 100px;
     margin-right: 15px;
 
-    &.visible {
-        margin-right: 0;
-    }
+    &.visible { margin-right: 0 }
     
     .lime {
         position: fixed;
@@ -20,8 +18,10 @@
         opacity: 0;
         z-index: 2;
 
-        &.visible {
-            opacity: 1;
+        &.visible { opacity: 1 }
+
+        @include rwd--width(768) {
+            height: 105px;
         }
     }
 
@@ -30,7 +30,6 @@
         height: calc(100vh + 92px); width: calc(100% + 15px);
         top: 0; left: 0;
         z-index: 4;
-        //border: 2px solid black;
 
         &__film {
             background-color: rgba(black, .2);
@@ -50,9 +49,7 @@
             letter-spacing: 1.5vw;
         }
 
-        &.hidden {
-            display: none;
-        }
+        &.hidden { display: none }
     }
 
     &__img__container {
@@ -83,7 +80,7 @@
             }
 
             &--medium--2 {
-                position: absolute;                //border: 1px solid red;
+                position: absolute;               
                 width: 37%; max-width: 380px;
                 bottom: 6%; left: 0;
                 transform: translateX(-110%);
@@ -92,12 +89,9 @@
 
             &--small {
                 position: absolute;
-                //border: 1px solid purple;
                 bottom: 13%; left: 8%;
                 width: 15%;
                 transform: scaleX(-1) rotateZ(40deg);
-                //opacity: .8;
-                //z-index: -1;
             }
         }
     }
@@ -109,6 +103,10 @@
         align-items: center;
         width: 80%;
         z-index: 3;
+        
+        @include rwd--width(625) {
+            width: 100%;
+        }
 
         .textbox {
             &__introducing {
@@ -123,33 +121,31 @@
                 font-size: 20px;
                 font-weight: 700;
 
-                &.visible {
-                    opacity: 1;
-                }
+                &.visible { opacity: 1 }
             }
         }
 
         .stormwell {
             max-width: 100%;   
-            filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, .35));     
+            filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, .35));  
+            
+            @keyframes line-fill {
+                to {
+                    stroke-dashoffset: 0;
+                }
+            }
+
+            @keyframes word-fill {
+                from {
+                    fill: transparent
+                } to {
+                    fill: #FF8B60
+                }
+            }
 
             &--desktop {
-                animation: word-fill .65s forwards 3500ms;
-                
-                @keyframes line-fill {
-                    to {
-                        stroke-dashoffset: 0;
-                    }
-                }
-    
-                @keyframes word-fill {
-                    from {
-                        fill: transparent
-                    } to {
-                        fill: #FF8B60
-                    }
-                }
-    
+                animation: word-fill .65s forwards 3500ms;    
+
                 path {                               
                     &:nth-child(1) {
                         stroke-dasharray: 577.1;
@@ -184,7 +180,7 @@
                     &:nth-child(7) {
                         stroke-dasharray: 601.2;
                         stroke-dashoffset: 601.2;     
-                        animation: line-fill 2s ease forwards 800ms;               
+                        animation: line-fill 4s ease forwards 800ms;               
                     }
                     &:nth-child(8) {
                         stroke-dasharray: 398;
@@ -197,87 +193,70 @@
                         animation: line-fill 3s ease forwards;                  
                     }
                 }
+
+                @include rwd--width(768) { display: none }
             }
     
-            // &--mobile {
-            //     animation: word-fill .65s forwards 3350ms;
-            //     path {
-            //         &:nth-child(1) {
-            //             stroke-dasharray: 415.5;
-            //             stroke-dashoffset: 415.5;
-            //             animation: line-fill 2.5s ease forwards 800ms;
-            //         }
-            //         &:nth-child(2) {
-            //             stroke-dasharray: 328.4;
-            //             stroke-dashoffset: 328.4;
-            //             animation: line-fill 2.8s ease forwards 400ms;
-            //         }
-            //         &:nth-child(3) {
-            //             stroke-dasharray: 379.5;
-            //             stroke-dashoffset: 379.5;
-            //             animation: line-fill 1.8s ease forwards 950ms;
-                        
-            //         }
-            //         &:nth-child(4) {
-            //             stroke-dasharray: 267.6;
-            //             stroke-dashoffset: 267.6;
-            //             animation: line-fill 1.8s ease forwards 1300ms;
-            //         }
-            //         &:nth-child(5) {
-            //             stroke-dasharray: 631.8;
-            //             stroke-dashoffset: 631.8;         
-            //             animation: line-fill 3s ease forwards 800ms;           
-            //         }
-            //         &:nth-child(6) {
-            //             stroke-dasharray: 640.5;
-            //             stroke-dashoffset: 640.5;               
-            //             animation: line-fill 3s ease forwards 400ms;     
-            //             transform: translateY(-50px);
-            //         }
-            //         &:nth-child(7) {
-            //             stroke-dasharray: 462.9;
-            //             stroke-dashoffset: 462.9;   
-            //             animation: line-fill 2s ease forwards 1200ms;             
-            //             transform: translateY(-50px);
-
-            //         }
-            //         &:nth-child(8) {
-            //             stroke-dasharray: 306.5;
-            //             stroke-dashoffset: 306.5;            
-            //             animation: line-fill 1.4s ease forwards 1500ms;    
-            //             transform: translateY(-50px);
-            //         }
-            //         &:nth-child(9) {
-            //             stroke-dasharray: 306.5;
-            //             stroke-dashoffset: 306.5;  
-            //             animation: line-fill 3s ease forwards 400ms;      
-            //             transform: translateY(-50px);            
-            //         }
-            //     }
-    
-            //     @keyframes line-fill {
-            //         to {
-            //             stroke-dashoffset: 0;
-            //         }
-            //     }
-    
-            //     @keyframes word-fill {
-            //         from {
-            //             fill: transparent
-            //         } to {
-            //             //fill: #070867;
-            //             fill: #FF8B60
-            //         }
-            //     }
-            // }
-
-            &.no-trace {
-                animation: none;
-                fill: #FF8B60;
+            &--mobile {
+                display: none;
+                animation: word-fill .65s forwards 3350ms;
+                transform: translateY(40px);
 
                 path {
-                    animation: none;
+                    &:nth-child(1) {
+                        stroke-dasharray: 415.5;
+                        stroke-dashoffset: 415.5;
+                        animation: line-fill 2.5s ease forwards 800ms;
+                    }
+                    &:nth-child(2) {
+                        stroke-dasharray: 328.4;
+                        stroke-dashoffset: 328.4;
+                        animation: line-fill 2.8s ease forwards 400ms;
+                    }
+                    &:nth-child(3) {
+                        stroke-dasharray: 379.5;
+                        stroke-dashoffset: 379.5;
+                        animation: line-fill 1.8s ease forwards 950ms;
+                        
+                    }
+                    &:nth-child(4) {
+                        stroke-dasharray: 267.6;
+                        stroke-dashoffset: 267.6;
+                        animation: line-fill 1.8s ease forwards 1300ms;
+                    }
+                    &:nth-child(5) {
+                        stroke-dasharray: 631.8;
+                        stroke-dashoffset: 631.8;         
+                        animation: line-fill 3s ease forwards 800ms;           
+                    }
+                    &:nth-child(6) {
+                        stroke-dasharray: 640.5;
+                        stroke-dashoffset: 640.5;               
+                        animation: line-fill 3s ease forwards 400ms;     
+                        transform: translateY(-50px);
+                    }
+                    &:nth-child(7) {
+                        stroke-dasharray: 462.9;
+                        stroke-dashoffset: 462.9;   
+                        animation: line-fill 2s ease forwards 1200ms;             
+                        transform: translateY(-50px);
+
+                    }
+                    &:nth-child(8) {
+                        stroke-dasharray: 306.5;
+                        stroke-dashoffset: 306.5;            
+                        animation: line-fill 1.4s ease forwards 1500ms;    
+                        transform: translateY(-50px);
+                    }
+                    &:nth-child(9) {
+                        stroke-dasharray: 306.5;
+                        stroke-dashoffset: 306.5;  
+                        animation: line-fill 3s ease forwards 400ms;      
+                        transform: translateY(-50px);            
+                    }
                 }
+
+                @include rwd--width(768) { display: block }
             }
         }
     }
