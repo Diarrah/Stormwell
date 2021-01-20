@@ -9,7 +9,8 @@ const App = () => {
           heroEl = useRef(),
           aboutEl = useRef(),
           recipeEl = useRef(),
-          contactEl = useRef();
+          contactEl = useRef(),
+          footerEl = useRef();
     const [viewport, setViewport] = useState(window.innerWidth);
 
         function useWindowSize() {
@@ -28,7 +29,7 @@ const App = () => {
         useWindowSize()
 
     return (
-        <StormwellContext.Provider value={{navbarEl, heroEl, aboutEl, recipeEl, contactEl, viewport}}>
+        <StormwellContext.Provider value={{navbarEl, heroEl, aboutEl, recipeEl, contactEl, footerEl, viewport}}>
             <div className="App">
                 <Navbar />
                 <Hero />
